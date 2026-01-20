@@ -59,7 +59,7 @@ export default function RotatingServiceCards() {
         const deltaTime = currentTime - lastTime
         lastTime = currentTime
         
-        rotation += (360 / 18000) * deltaTime
+        rotation += (360 / 12000) * deltaTime
         
         if (slidesRef.current) {
           slidesRef.current.style.transform = `rotateY(${rotation}deg)`

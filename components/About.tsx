@@ -14,10 +14,10 @@ export default function About() {
       <div className="container mx-auto px-16">
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, x: -50, y: 20 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="flex-1 space-y-10"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-cream mb-8 inline-block relative after:content-[''] after:absolute after:-bottom-4 after:left-0 after:w-20 after:h-1 after:bg-cream">
@@ -40,10 +40,10 @@ export default function About() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="flex-1 w-full max-w-sm relative group"
           >
             <div className="relative p-4">

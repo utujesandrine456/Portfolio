@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    // Disable optimizer to avoid ResponseAborted issues for local assets
+    unoptimized: true,
+  },
   webpack: (config) => {
     // Fix for three.js ESM module resolution
     config.resolve.alias = {

@@ -96,7 +96,7 @@ export default function Process() {
                 >
                     <p className="text-white/50 text-lg mb-8 font-light">Ready to bring your vision to life?</p>
                     <Link
-                        href="#contact"
+                        href="https://github.com/utujesandrine456"
                         className="group relative flex items-center gap-4 px-10 py-5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full overflow-hidden transition-all duration-300 hover:bg-cream hover:text-black hover:border-cream hover:shadow-[0_0_40px_rgba(218,197,167,0.3)]"
                     >
                         <span className="relative z-10 font-bold text-xl">Let's Work Together</span>

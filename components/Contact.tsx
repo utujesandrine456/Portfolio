@@ -32,10 +32,10 @@ export default function Contact() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, x: -50, y: 20 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
             <h2 className="text-5xl md:text-7xl font-bold mb-8 text-cream">
               Ready To Transform Your Idea To Reality
@@ -52,10 +52,10 @@ export default function Contact() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, x: 50, y: 20 }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="bg-white/[0.02] backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-3xl relative overflow-hidden group"
           >
             <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
@@ -117,7 +117,13 @@ export default function Contact() {
 
 function ContactItem({ icon: Icon, title, value }: { icon: any, title: string, value: string }) {
   return (
-    <div className="flex items-center gap-6 p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors duration-300 group cursor-default">
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className="flex items-center gap-6 p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors duration-300 group cursor-default"
+    >
       <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-cream group-hover:scale-110 transition-transform duration-300">
         <Icon size={24} />
       </div>
@@ -125,7 +131,7 @@ function ContactItem({ icon: Icon, title, value }: { icon: any, title: string, v
         <p className="text-xs text-white/40 font-mono uppercase tracking-wider mb-1">{title}</p>
         <p className="text-lg font-medium text-white group-hover:text-cream transition-colors">{value}</p>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

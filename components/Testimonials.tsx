@@ -4,26 +4,41 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Quote } from 'lucide-react'
 
+
 const testimonials = [
-    {
-        id: 0,
-        name: 'Sarah Johnson',
-        role: 'CEO, TechStart',
-        text: "Sandra transformed our outdated platform into a modern, high-performance web app. The attention to detail and smooth animations are incredible.",
-    },
-    {
-        id: 1,
-        name: 'Michael Chen',
-        role: 'Product Manager, InnovateCorp',
-        text: "Working with Sandra was seamless. She understood our requirements perfectly and delivered a solution that exceeded our expectations.",
-    },
-    {
-        id: 2,
-        name: 'Emily Davis',
-        role: 'Creative Director',
-        text: "A true artist in code. The site not only functions perfectly but looks absolutely stunning. Highly recommended for any premium project.",
-    },
-]
+  {
+    id: 0,
+    name: 'UWASE Sonia',
+    role: 'Frontend Developer',
+    text: "Sandrine is a skilled Frontend Developer who consistently delivers clean, responsive, and well-structured interfaces. Her attention to detail greatly improves overall application quality.",
+  },
+  {
+    id: 1,
+    name: 'BUGINGO Derick Erick',
+    role: 'Backend Developer',
+    text: "Working with Sandrine was seamless. Her frontend implementations integrated smoothly with backend logic, and her understanding of data flow made collaboration efficient.",
+  },
+  {
+    id: 2,
+    name: 'Bienvenue Alliance Dieu d\'Amour',
+    role: 'CEO, Blink Technologiz',
+    text: "Sandrine contributed significantly to our projects through strong frontend development and solid database structuring. She delivered reliable and professional solutions.",
+  },
+  {
+    id: 3,
+    name: 'NZABARINDA Theoneste',
+    role: 'Software Engineer, AIMS Rwanda',
+    text: "Sandrine worked on frontend implementation and database-related tasks for our system. Her work was well-organized, efficient, and easy to maintain.",
+  },
+  {
+    id: 4,
+    name: 'Louis Mukama',
+    role: 'Instructor at Rwanda Coding Academy',
+    text: "Sandrine played a key role in developing the frontend and designing the database for our Internship Management System. The platform was efficient, scalable, and professionally delivered.",
+  },
+]   
+
+
 
 export default function Testimonials() {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -45,10 +60,32 @@ export default function Testimonials() {
 
             <div className="container mx-auto px-6 relative z-10 w-full max-w-6xl">
 
-                <div className="text-center mb-24 relative">
-                    <span className="text-cream/50 font-mono tracking-widest text-sm uppercase mb-4 block">Endorsements</span>
-                    <h2 className="text-5xl md:text-7xl font-bold text-white">What Clients Say</h2>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-center mb-24 relative"
+                >
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.2 }}
+                      className="text-cream/50 font-mono tracking-widest text-sm uppercase mb-4 block"
+                    >
+                      Endorsements
+                    </motion.span>
+                    <motion.h2
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-5xl md:text-7xl font-bold text-white"
+                    >
+                      What Clients Say
+                    </motion.h2>
+                </motion.div>
 
                 <div className="relative">
                     <button

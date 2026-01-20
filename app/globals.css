@@ -25,6 +25,41 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Enhanced smooth scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  * {
+    scroll-margin-top: 80px;
+  }
+}
+
+html {
+  scroll-padding-top: 80px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Better scroll performance */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 body {
@@ -70,7 +105,6 @@ body {
   background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
 }
 
-/* 3D Rotating Cards Styles */
 .perspective-1000 {
   perspective: 1000px;
   perspective-origin: center center;
@@ -80,7 +114,6 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Shine animation for cards */
 @keyframes shine {
   0% {
     transform: translateX(-100%) translateY(-100%) rotate(45deg);

@@ -10,7 +10,6 @@ export default function Loader() {
   const { theme } = useTheme()
 
   useEffect(() => {
-    // Progress animation
     const progressInterval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -23,7 +22,6 @@ export default function Loader() {
 
     const tl = gsap.timeline()
 
-    // Simple entrance animation
     tl.fromTo('.loader-circle',
       {
         scale: 0,
@@ -66,7 +64,7 @@ export default function Loader() {
   if (!isLoading) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-black">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black dark:bg-black">
       <div className="loader-container relative">
         {/* Single Creative Circle */}
         <div className="relative w-48 h-48">
