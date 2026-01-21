@@ -66,11 +66,8 @@ export default function Loader() {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black dark:bg-black">
       <div className="loader-container relative">
-        {/* Single Creative Circle */}
         <div className="relative w-48 h-48">
-          {/* Main Circle Container */}
           <div className="loader-circle absolute inset-0 rounded-full border-2 border-black/20 dark:border-cream/20">
-            {/* Animated Border - Rotating Gradient */}
             <div 
               className="absolute -inset-2 rounded-full border-2 border-transparent"
               style={{
@@ -84,10 +81,8 @@ export default function Loader() {
               }}
             />
             
-            {/* Inner Dotted Ring */}
             <div className="absolute inset-4 rounded-full border border-dashed border-black/10 dark:border-cream/10" />
-            
-            {/* Floating Particles */}
+          
             <div className="absolute inset-0">
               {Array.from({ length: 8 }).map((_, i) => {
                 const angle = (i * 45) + (progress * 3.6)
