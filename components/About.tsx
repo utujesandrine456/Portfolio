@@ -50,7 +50,7 @@ export default function About() {
               <div className="absolute inset-0 border border-cream/20 rounded-full scale-[1.1] rotate-12 opacity-0 group-hover:opacity-100 transition-all duration-700" />
               <div className="absolute inset-0 border border-cream/10 rounded-full scale-[1.2] -rotate-6 opacity-0 group-hover:opacity-100 transition-all duration-1000 delay-100" />
 
-              <div className="relative z-10 mx-auto aspect-[3/4] overflow-hidden rounded-2xl bg-[#0a0a0a]">
+              <div className="relative z-10 mx-auto aspect-[3/4] overflow-hidden rounded-2xl bg-[#0a0a0a] project-card" data-cursor="ABOUT ME">
                 <div className="absolute inset-0 border border-cream/20 z-20 rounded-2xl transition-all duration-500 group-hover:border-cream/40" />
                 <Image
                   src="/SandrineWhite.jpg"

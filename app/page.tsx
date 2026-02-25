@@ -11,7 +11,9 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import Journey from '@/components/Journey'
 import Process from '@/components/Process'
+import Innovation from '@/components/Innovation'
 import Testimonials from '@/components/Testimonials'
+
 
 export default function Home() {
   useEffect(() => {
@@ -27,6 +29,7 @@ export default function Home() {
       <Journey />
       <Skills />
       <Process />
+      <Innovation />
       <Projects />
       <Testimonials />
       <Contact />
@@ -34,4 +37,3 @@ export default function Home() {
     </main>
   )
 }
-

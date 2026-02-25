@@ -6,8 +6,10 @@ import {
   Code2, Server, Database, Layout,
   Shield, Lock, Globe, Key,
   PenTool, Box, Terminal,
-  Atom, Smartphone, Container, GitBranch, Cloud
+  Atom, Smartphone, Container, GitBranch, Cloud, Layers, 
 } from 'lucide-react'
+import { FaJava } from "react-icons/fa";
+
 
 const skillCategories = [
   {
@@ -17,6 +19,7 @@ const skillCategories = [
       { name: 'React', icon: Atom, level: 95 },
       { name: 'TypeScript', icon: Terminal, level: 92 },
       { name: 'Next.js', icon: Code2, level: 90 },
+      { name: 'Angular', icon: Layers, level: 82 },
       { name: 'React Native', icon: Smartphone, level: 88 },
       { name: 'Flutter', icon: Layout, level: 85 },
       { name: 'Figma', icon: PenTool, level: 90 },
@@ -29,6 +32,7 @@ const skillCategories = [
       { name: 'Node.js', icon: Server, level: 90 },
       { name: 'Express', icon: Globe, level: 88 },
       { name: 'NestJS', icon: Box, level: 85 },
+      { name: 'Java (Spring Boot)', icon: FaJava, level: 82 },
       { name: 'REST APIs', icon: Cloud, level: 92 },
       { name: 'PostgreSQL', icon: Database, level: 85 },
       { name: 'MongoDB', icon: Database, level: 82 },
@@ -182,7 +186,8 @@ function SkillOrb({ skill, index }: { skill: any, index: number }) {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="group relative flex flex-col items-center justify-center gap-4"
+      className="group relative flex flex-col items-center justify-center gap-4 project-card magnetic"
+      data-cursor="EXPERT"
     >
       {/* 1. The Floating Orb */}
       <div className="relative w-32 h-32 flex items-center justify-center">

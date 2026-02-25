@@ -2,59 +2,10 @@
 
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { ArrowUpRight, Github } from 'lucide-react'
+import { ArrowUpRight, Github, Play, ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 
-const projects = [
-  {
-    id: 1,
-    title: "ZERO",
-    subtitle: "E-Commerce Platform",
-    description: "A complete online shopping solution with Inventory management, payment processing, and analytics.",
-    image: "/ZERO.png",
-    videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-    category: "E-Commerce",
-    technologies: ["React", "Node.js", "MongoDB"],
-    liveUrl: "https://zero-pink.vercel.app/",
-    githubUrl: "https://github.com/utujesandrine456/ZERO"
-  },
-  {
-    id: 2,
-    title: "TradeWise",
-    subtitle: "Trading & Finance",
-    description: "A comprehensive trading platform with real-time market data, portfolio management, and advanced analytics.",
-    image: "/TradeWise_overview.png",
-    videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-    category: "Trading & Finance",
-    technologies: ["React.js", "Nest.js", "Prisma"],
-    liveUrl: "https://tradewise-cyan.vercel.app/",
-    githubUrl: "https://github.com/utujesandrine456/TradeWise"
-  },
-  {
-    id: 3,
-    title: "Lumina",
-    subtitle: "Agriculture & Transport",
-    description: "A transport solution for booking rides, tracking drivers, and secure payments.",
-    image: "/Lumina.png",
-    videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-    category: "Transport",
-    technologies: ["React Native", "Express.js"],
-    liveUrl: "https://tradewise-cyan.vercel.app/",
-    githubUrl: "https://github.com/utujesandrine456/Lumina"
-  },
-  {
-    id: 4,
-    title: "Aroena",
-    subtitle: "Hotel Management System",
-    description: "A smart food management system to reduce waste and suggest recipes.",
-    image: "/Aroena.png",
-    videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-    category: "Health & Wellness",
-    technologies: ["Vue.js", "Node.js", "MongoDB"],
-    liveUrl: "https://tradewise-cyan.vercel.app/",
-    githubUrl: "https://github.com/utujesandrine456/Aroena"
-  },
-]
+import { projects } from '@/constants/projects'
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(0)
@@ -98,9 +49,13 @@ export default function Projects() {
                   />
                 </div>
               </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none" />
-              <div className="absolute top-6 right-6 md:top-8 md:right-8 px-3 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-xl text-xs text-white/80 tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                Click to watch
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300">
+                <div className="w-16 h-16 rounded-full bg-cream text-black flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.5)] scale-90 group-hover:scale-100 transition-all duration-500">
+                  <Play size={28} fill="currentColor" />
+                </div>
+              </div>
+              <div className="absolute top-6 right-6 md:top-8 md:right-8 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-xl text-[10px] text-cream font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                Watch video
               </div>
               <div className="absolute bottom-6 left-6 right-6 p-4 bg-black/65 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
                 <p className="text-[11px] text-cream uppercase tracking-[0.3em] mb-1">{projects[activeProject].category}</p>
@@ -109,20 +64,39 @@ export default function Projects() {
             </button>
           </div>
 
-          <div className="space-y-8">
-            {projects.map((project, index) => (
-              <ProjectItem
-                key={project.id}
-                project={project}
-                index={index}
-                isActive={activeProject === index}
-                onActivate={() => setActiveProject(index)}
-                onOpenVideo={() => {
-                  setActiveProject(index)
-                  setIsVideoOpen(true)
-                }}
-              />
-            ))}
+          <div className="space-y-8 flex flex-col justify-between">
+            <div className="space-y-8">
+              {projects.slice(0, 3).map((project, index) => (
+                <ProjectItem
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  isActive={activeProject === index}
+                  onActivate={() => setActiveProject(index)}
+                  onOpenVideo={() => {
+                    setActiveProject(index)
+                    setIsVideoOpen(true)
+                  }}
+                />
+              ))}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="pt-8 flex justify-end"
+            >
+              <a
+                href="/projects"
+                className="group flex items-center gap-4 px-8 py-4 rounded-full border border-cream/30 hover:bg-cream hover:text-black transition-all duration-500 text-lg font-medium magnetic"
+              >
+                Explore All Projects
+                <div className="w-10 h-10 rounded-full bg-cream/10 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+                  <ArrowUpRight size={20} />
+                </div>
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -189,8 +163,12 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
             className="object-contain p-3"
             sizes="(max-width: 768px) 100vw, 160px"
           />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-          <div className="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-black/70 border border-white/10 text-[11px] text-white/80">
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-cream text-black flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300 shadow-lg">
+              <Play size={18} fill="currentColor" />
+            </div>
+          </div>
+          <div className="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-black/70 border border-white/10 text-[10px] text-cream font-bold uppercase tracking-tight">
             Video
           </div>
         </button>
@@ -267,57 +245,83 @@ function ProjectVideoModal({
     <AnimatePresence >
       {open ? (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onMouseDown={onClose}
         >
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
-
           <motion.div
-            className="relative w-full max-w-5xl max-h-[calc(100vh-60px)] rounded-3xl border border-white/10 bg-black/80 shadow-[0_40px_120px_rgba(0,0,0,0.6)] overflow-hidden"
-            initial={{ y: 18, scale: 0.98, opacity: 0 }}
-            animate={{ y: 0, scale: 1, opacity: 1 }}
-            exit={{ y: 18, scale: 0.98, opacity: 0 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="relative w-full max-w-6xl bg-[#0a0a0a] border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl"
+            initial={{ scale: 0.9, y: 40 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.9, y: 40 }}
             onMouseDown={(e) => e.stopPropagation()}
           >
-            <div className="px-6 md:px-8 py-4 border-b border-white/10 flex items-center justify-between gap-6">
-              <div>
-                <p className="text-[11px] text-cream uppercase tracking-[0.3em]">{subtitle}</p>
-                <h3 className="text-xl md:text-2xl font-bold text-white">{title}</h3>
-              </div>
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors text-white/80"
-              >
-                Close
-              </button>
-            </div>
+            <div className="grid lg:grid-cols-[1fr_350px]">
+              {/* Video Area */}
+              <div className="p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h2 className="text-3xl font-bold text-cream underline decoration-cream/30 decoration-2 underline-offset-8">
+                      {title}
+                    </h2>
+                    <p className="text-white/40 text-sm mt-3">{subtitle}</p>
+                  </div>
+                  <button
+                    onClick={onClose}
+                    className="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 transition-all font-bold text-sm tracking-widest uppercase"
+                  >
+                    Close
+                  </button>
+                </div>
 
-            <div className="p-4 md:p-10">
-              <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(218,197,167,0.15),transparent_45%)] pointer-events-none z-10" />
-                <div className="relative w-full aspect-video z-0">
+                <div className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 bg-black">
                   <iframe
                     className="absolute inset-0 w-full h-full"
                     src={videoUrl}
-                    title={`${title} video`}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    title={`${title} walkthrough`}
                     allowFullScreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   />
                 </div>
               </div>
-              <div className="mt-6 flex items-center justify-between">
-                <p className="text-sm text-white/40 italic">
-                  Project demonstration & walkthrough
-                </p>
-                <div className="flex gap-2">
-                  <span className="w-2 h-2 rounded-full bg-cream animate-pulse" />
-                  <span className="w-2 h-2 rounded-full bg-white/20" />
-                  <span className="w-2 h-2 rounded-full bg-white/20" />
+
+              {/* Details Area - Matching Portfolio Archive */}
+              <div className="p-8 lg:p-10 flex flex-col bg-white/[0.02]">
+                <h4 className="text-xs uppercase tracking-[0.3em] text-cream mb-6 font-bold">Process & Step-by-Step</h4>
+
+                <div className="space-y-8 flex-1">
+                  <div className="flex gap-4">
+                    <div className="w-8 h-8 rounded-full bg-cream/10 border border-cream/30 flex items-center justify-center text-[10px] font-bold text-cream shrink-0">01</div>
+                    <div>
+                      <p className="text-sm font-bold mb-1 italic">Architecture & Planning</p>
+                      <p className="text-[11px] text-white/40 leading-relaxed">Designing the core foundations and data models for scalability.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-8 h-8 rounded-full bg-cream/10 border border-cream/30 flex items-center justify-center text-[10px] font-bold text-cream shrink-0">02</div>
+                    <div>
+                      <p className="text-sm font-bold mb-1 italic">Security & Logic</p>
+                      <p className="text-[11px] text-white/40 leading-relaxed">Implementing system hardening and robust backend functionality.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="w-8 h-8 rounded-full bg-cream/10 border border-cream/30 flex items-center justify-center text-[10px] font-bold text-cream shrink-0">03</div>
+                    <div>
+                      <p className="text-sm font-bold mb-1 italic">UI & Refinement</p>
+                      <p className="text-[11px] text-white/40 leading-relaxed">Polishing interactions and ensuring a premium user experience.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-10 space-y-3">
+                  <button
+                    onClick={onClose}
+                    className="w-full py-4 rounded-2xl bg-cream text-black font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all text-sm"
+                  >
+                    Back to Portfolio <ChevronRight size={18} />
+                  </button>
                 </div>
               </div>
             </div>

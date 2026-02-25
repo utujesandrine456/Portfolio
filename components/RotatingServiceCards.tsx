@@ -1,51 +1,48 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { Code2, Database, Shield, Layout } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Code2, Database, Shield, Layout, ArrowRight, Plus } from 'lucide-react'
 
 const services = [
-    {
-      id: 1,
-      title: 'Frontend & Mobile Development',
-      description:
-        'React, Next.js, React Native, Flutter – Crafting fast, responsive, and user-focused web and mobile applications.',
-      icon: Code2,
-      color: 'from-cream/10 to-cream/5',
-      borderColor: 'border-cream/30',
-    },
-    {
-      id: 2,
-      title: 'UI / UX Design',
-      description:
-        'Designing intuitive, visually engaging interfaces with a strong focus on usability, accessibility, and user experience.',
-      icon: Layout,
-      color: 'from-cream/15 to-cream/8',
-      borderColor: 'border-cream/35',
-    },
-    {
-      id: 3,
-      title: 'System Hardening',
-      description:
-        'Securing systems through configuration hardening, vulnerability reduction, and security best practices.',
-      icon: Shield,
-      color: 'from-cream/12 to-cream/6',
-      borderColor: 'border-cream/32',
-    },
-    {
-      id: 4,
-      title: 'Database Design',
-      description:
-        'Designing efficient, scalable, and well-structured databases optimized for performance and reliability.',
-      icon: Database,
-      color: 'from-cream/10 to-cream/5',
-      borderColor: 'border-cream/30',
-    },
-  ]
-  
+  {
+    id: 1,
+    title: 'Frontend & Mobile',
+    subtitle: 'APPS & WEB',
+    description:
+      'React, Next.js, React Native, Flutter – Crafting fast, responsive, and user-focused web and mobile applications.',
+    icon: Code2,
+  },
+  {
+    id: 2,
+    title: 'UI / UX Design',
+    subtitle: 'INTERFACES',
+    description:
+      'Designing intuitive, visually engaging interfaces with a strong focus on usability, accessibility, and user experience.',
+    icon: Layout,
+  },
+  {
+    id: 3,
+    title: 'System Hardening',
+    subtitle: 'SECURITY',
+    description:
+      'Securing systems through configuration hardening, vulnerability reduction, and security best practices.',
+    icon: Shield,
+  },
+  {
+    id: 4,
+    title: 'Database Design',
+    subtitle: 'SCALABILITY',
+    description:
+      'Designing efficient, scalable, and well-structured databases optimized for performance and reliability.',
+    icon: Database,
+  },
+]
 
 export default function RotatingServiceCards() {
   const slidesRef = useRef<HTMLDivElement>(null)
   const isPausedRef = useRef(false)
+  const [hoveredId, setHoveredId] = useState<number | null>(null)
 
   useEffect(() => {
     if (!slidesRef.current) return
@@ -58,9 +55,7 @@ export default function RotatingServiceCards() {
       if (!isPausedRef.current) {
         const deltaTime = currentTime - lastTime
         lastTime = currentTime
-        
-        rotation += (360 / 12000) * deltaTime
-        
+        rotation += (360 / 15000) * deltaTime
         if (slidesRef.current) {
           slidesRef.current.style.transform = `rotateY(${rotation}deg)`
         }
@@ -72,37 +67,19 @@ export default function RotatingServiceCards() {
 
     animationId = requestAnimationFrame(animate)
 
-
-    const handleMouseEnter = () => {
-      isPausedRef.current = true
-    }
-    const handleMouseLeave = () => {
-      isPausedRef.current = false
-    }
-
-    if (slidesRef.current) {
-      slidesRef.current.addEventListener('mouseenter', handleMouseEnter)
-      slidesRef.current.addEventListener('mouseleave', handleMouseLeave)
-    }
-
     return () => {
-      if (animationId) {
-        cancelAnimationFrame(animationId)
-      }
-      if (slidesRef.current) {
-        slidesRef.current.removeEventListener('mouseenter', handleMouseEnter)
-        slidesRef.current.removeEventListener('mouseleave', handleMouseLeave)
-      }
+      if (animationId) cancelAnimationFrame(animationId)
     }
   }, [])
 
   return (
-    <div className="relative w-full h-[350px] md:h-[450px] flex items-center justify-center">
-      <div 
-        className="relative w-[280px] h-[180px] md:w-[320px] md:h-[220px]"
-        style={{
-          perspective: '1200px',
-        }}
+    <div className="relative w-full h-[450px] md:h-[550px] flex items-center justify-center overflow-visible">
+      {/* Dynamic Background Glow */}
+      <div className="absolute inset-0 bg-cream/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div
+        className="relative w-[300px] h-[200px] md:w-[350px] md:h-[250px]"
+        style={{ perspective: '2000px' }}
       >
         <div
           ref={slidesRef}
@@ -114,52 +91,112 @@ export default function RotatingServiceCards() {
         >
           {services.map((service, index) => {
             const angle = (360 / services.length) * index
-            const radius = 200 
+            const radius = 220
 
             return (
               <div
                 key={service.id}
                 className="absolute"
                 style={{
-                  width: '240px',
-                  height: '300px',
+                  width: '260px',
+                  height: '340px',
                   left: '50%',
                   top: '50%',
-                  marginLeft: '-120px',
-                  marginTop: '-150px',
+                  marginLeft: '-130px',
+                  marginTop: '-170px',
                   transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
                   transformStyle: 'preserve-3d',
                 }}
+                onMouseEnter={() => {
+                  isPausedRef.current = true
+                  setHoveredId(service.id)
+                }}
+                onMouseLeave={() => {
+                  isPausedRef.current = false
+                  setHoveredId(null)
+                }}
               >
-                <div
-                  className={`relative w-full h-full rounded-2xl  backdrop-blur-xl border ${service.borderColor} p-5 md:p-6 flex flex-col justify-between shadow-2xl transition-all duration-500 cursor-pointer group overflow-hidden hover:text-black`}
+                <motion.div
+                  className={`project-card magnetic relative w-full h-full rounded-2xl border transition-all duration-700 overflow-hidden bg-black/40 backdrop-blur-xl ${hoveredId === service.id ? 'border-cream' : 'border-white/10'
+                    }`}
                   style={{
-                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(218, 197, 167, 0.08)',
+                    boxShadow: hoveredId === service.id
+                      ? '0 20px 40px -10px rgba(0,0,0,0.5), 0 0 20px -5px rgba(218, 197, 167, 0.4)'
+                      : '0 10px 30px -10px rgba(0,0,0,0.3)',
                   }}
                 >
-                  <div className={`absolute inset-0 bg-cream/40 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
+                  {/* Grid Pattern Background */}
+                  <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
 
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex justify-center mb-4">
-                      <div className={`w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${service.color} border ${service.borderColor} flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 group-hover:bg-cream/20 group-hover:border-cream/50 transition-all duration-500`}>
-                        <service.icon className="w-7 h-7 md:w-8 md:h-8 text-cream group-hover:text-white transition-colors duration-300" />
+                  {/* Subtle Cream Gradient Reveal */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-cream/10 to-transparent opacity-0 transition-opacity duration-700"
+                    animate={{ opacity: hoveredId === service.id ? 1 : 0 }}
+                  />
+
+                  {/* Top Bar Architectural Detail */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-white/5 overflow-hidden">
+                    <motion.div
+                      className="h-full bg-cream"
+                      initial={{ width: 0 }}
+                      animate={{ width: hoveredId === service.id ? '100%' : '20%' }}
+                      transition={{ duration: 0.8 }}
+                    />
+                  </div>
+
+                  <div className="relative z-10 flex flex-col h-full p-6">
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-8">
+                      <div className="flex flex-col">
+                        <span className="text-[10px] tracking-[0.3em] text-cream mb-1 font-bold">
+                          {service.subtitle}
+                        </span>
+                        <div className="h-px w-8 bg-cream/30" />
+                      </div>
+                      <Plus size={14} className="text-white/20" />
+                    </div>
+
+                    {/* Icon Container */}
+                    <div className="flex justify-center mb-6">
+                      <div className="relative">
+                        <motion.div
+                          className="absolute inset-0 blur-2xl opacity-40 rounded-full bg-cream/30"
+                          animate={{ scale: hoveredId === service.id ? 1.5 : 1 }}
+                        />
+                        <div className={`relative w-20 h-20 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center group transition-all duration-500 overflow-hidden`}>
+                          <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <service.icon
+                            size={32}
+                            className="text-cream transition-transform duration-500 group-hover:scale-110"
+                          />
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col justify-center">
-                      <h3 className="text-base md:text-xl font-bold text-cream mb-2 text-center group-hover:text-white transition-colors duration-300">
+                    {/* Content */}
+                    <div className="flex-1 flex flex-col items-center">
+                      <h3 className="text-xl font-bold text-white mb-3 text-center tracking-tight">
                         {service.title}
                       </h3>
-                      <p className="text-white/60 text-xs md:text-sm text-center leading-relaxed group-hover:text-white/80 transition-colors duration-300 line-clamp-3">
+                      <p className="text-white/40 text-[13px] text-center leading-relaxed font-light line-clamp-4">
                         {service.description}
                       </p>
                     </div>
 
-                    {/* Decorative corner accent */}
-                    <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-cream/40 group-hover:bg-cream group-hover:scale-150 transition-all duration-300" />
-                    <div className="absolute bottom-3 left-3 w-1 h-1 rounded-full bg-cream/30 group-hover:bg-cream/80 group-hover:scale-150 transition-all duration-300" />
+                    {/* Footer / CTA */}
+                    <motion.div
+                      className="mt-6 flex items-center justify-center gap-2 text-cream text-[11px] font-bold tracking-widest uppercase"
+                      animate={{ y: hoveredId === service.id ? 0 : 10, opacity: hoveredId === service.id ? 1 : 0 }}
+                    >
+                      Explore More
+                      <ArrowRight size={14} />
+                    </motion.div>
                   </div>
-                </div>
+
+                  {/* Corner Bits */}
+                  <div className="absolute top-4 right-4 text-[8px] text-white/10 font-mono">0{service.id}</div>
+                  <div className="absolute bottom-4 left-4 w-4 h-px bg-white/10" />
+                </motion.div>
               </div>
             )
           })}
@@ -168,4 +205,3 @@ export default function RotatingServiceCards() {
     </div>
   )
 }
-

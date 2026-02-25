@@ -101,7 +101,8 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-5 bg-cream text-black font-bold text-lg rounded-xl flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_20px_rgba(218,197,167,0.3)] hover:shadow-[0_0_40px_rgba(218,197,167,0.5)] disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full py-5 bg-cream text-black font-bold text-lg rounded-xl flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_0_20px_rgba(218,197,167,0.3)] hover:shadow-[0_0_40px_rgba(218,197,167,0.5)] disabled:opacity-70 disabled:cursor-not-allowed contact-btn"
+                data-cursor="GO!"
               >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
                 {!isSubmitting && <Send size={20} />}

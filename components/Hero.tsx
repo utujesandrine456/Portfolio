@@ -7,6 +7,8 @@ import ThreeBackground from './ThreeBackground'
 import RotatingServiceCards from './RotatingServiceCards'
 import { Github, Linkedin, Mail, Instagram } from 'lucide-react'
 
+
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
@@ -90,7 +92,7 @@ export default function Hero() {
             <button
               ref={buttonRef}
               onClick={scrollToProjects}
-              className="px-6 py-3 text-lg bg-cream text-black font-medium rounded-md hover:scale-105 transition-transform duration-300">
+              className="px-6 py-3 text-lg bg-cream text-black font-medium rounded-md hover:scale-105 transition-transform duration-300 magnetic">
               View My Work
             </button>
             <button
@@ -98,7 +100,7 @@ export default function Hero() {
                 const element = document.getElementById('contact')
                 if (element) element.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="px-6 py-3 bg-transparent border border-cream text-lg text-cream font-medium rounded-md hover:bg-cream/10 transition-colors duration-300">
+              className="px-6 py-3 bg-transparent border border-cream text-lg text-cream font-medium rounded-md hover:bg-cream/10 transition-colors duration-300 magnetic">
               Contact Me
             </button>
           </div>
@@ -108,7 +110,7 @@ export default function Hero() {
               href="https://github.com/utujesandrine456"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all"
+              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all magnetic"
             >
               <Github size={20} />
             </a>
@@ -117,14 +119,14 @@ export default function Hero() {
               href="https://www.linkedin.com/in/uwase-utuje-sandrine-5842b8386/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all"
+              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all magnetic"
             >
               <Linkedin size={20} />
             </a>
 
             <a
               href="mailto:utujesandrine456@gmail.com"
-              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all"
+              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all magnetic"
             >
               <Mail size={20} />
             </a>
@@ -133,7 +135,7 @@ export default function Hero() {
               href="https://instagram.com/utuje_001"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all"
+              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:border-cream hover:text-cream text-white/60 transition-all magnetic"
             >
               <Instagram size={20} />
             </a>
