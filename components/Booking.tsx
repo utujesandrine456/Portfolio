@@ -203,7 +203,7 @@ export default function Booking() {
                                                 </div>
                                             </div>
 
-                                            <div className="grid grid-cols-7 px-4 pt-4 pb-1">
+                                            <div className="grid grid-cols-7 px-4 pt-4 pb-4">
                                                 {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((d, i) => (
                                                     <div key={i} className={`text-center text-[10px] font-semibold uppercase tracking-widest pb-3 ${i === 5 ? 'text-white/15' : 'text-white/30'}`}>
                                                         {d}
