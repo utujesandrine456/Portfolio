@@ -9,7 +9,6 @@ const navItems = [
   { name: 'Journey', id: 'journey' },
   { name: 'Skills', id: 'skills' },
   { name: 'Process', id: 'process' },
-  { name: 'Technical Horizons', id: 'innovation' },
   { name: 'Projects', id: 'projects' },
 ]
 
@@ -57,7 +56,17 @@ export default function Navigation() {
   return (
     <>
       <div className="fixed top-6 inset-x-0 z-[100] flex justify-center px-4 pointer-events-none">
+        <button onClick={() => scrollToSection('about')} className="flex items-center gap-0.5 px-3 py-2 mr-2">
+          <span className="text-4xl font-bold tracking-tight text-cream">Utuje</span>
+          <span className="text-4xl font-bold tracking-tight text-cream/60">.</span>
+          <span className="text-4xl font-bold tracking-tight text-cream">dev</span>
+        </button>
+
         <nav className={`pointer-events-auto transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-xl shadow-2xl border-white/10 py-2' : 'bg-transparent border-cream/30 py-3'} border rounded-md px-2 flex items-center justify-between min-w-[300px] md:min-w-0`}>
+          
+
+          <div className="hidden md:block w-px h-5 bg-white/10 mr-2" />
+
           <ul className="hidden md:flex items-center gap-2">
             {navItems.map((item) => (
               <li key={item.id} className="relative">
@@ -83,7 +92,7 @@ export default function Navigation() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => scrollToSection('contact')}
-              className="hidden md:block group relative px-6 py-2 bg-cream text-black text-sm font-bold rounded-md overflow-hidden transition-transform hover:scale-105 magnetic"
+              className="hidden md:block group relative px-6 py-2 bg-cream text-black text-sm font-bold rounded-md overflow-hidden transition-transform hover:scale-105 magnetic mx-4"
             >
               <span className="relative z-10">Let's Talk</span>
               <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
@@ -110,6 +119,13 @@ export default function Navigation() {
             className="fixed inset-0 z-[90] bg-black/95 backdrop-blur-3xl md:hidden flex flex-col items-center justify-center p-8"
           >
             <div className="flex flex-col gap-8 w-full max-w-xs">
+              {/* Mobile Brand */}
+              <div className="mb-4">
+                <span className="text-2xl font-bold tracking-tight text-white">Utuje</span>
+                <span className="text-2xl font-bold tracking-tight text-cream">.</span>
+                <span className="text-2xl font-bold tracking-tight text-white/50">dev</span>
+              </div>
+              <div className="h-px bg-white/10" />
               {navItems.map((item, i) => (
                 <motion.button
                   key={item.id}
@@ -123,10 +139,12 @@ export default function Navigation() {
                   {item.name}
                 </motion.button>
               ))}
+
               <div className="h-px bg-white/10 my-4 " />
+
               <button
                 onClick={() => scrollToSection('contact')}
-                className="py-4 bg-cream text-black text-center font-bold rounded-md flex items-center justify-center gap-2 group"
+                className="py-4 bg-cream text-black text-center font-bold rounded-md flex items-center justify-center gap-2 group mx-2"
               >
                 Let's Talk
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

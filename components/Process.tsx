@@ -17,28 +17,28 @@ const steps = [
         number: '02',
         title: 'UI/UX Design',
         description:
-            'User interface and experience design crafted by the Blink Technologiz team, focusing on usability and visual clarity.',
+            'User interface and experience design crafted by the Lumina team, focusing on usability and visual clarity.',
         icon: PenTool,
     },
     {
         number: '03',
         title: 'Web Development',
         description:
-            'Frontend and backend development handled by the Blink Technologiz team using modern, scalable technologies.',
+            'Frontend and backend development handled by Lumina Team using modern, scalable technologies.',
         icon: Code2,
     },
     {
         number: '04',
         title: 'Deployment',
         description:
-            'Application deployment and environment setup executed by Blink Technologiz to ensure performance and reliability.',
+            'Application deployment and environment setup executed by Lumina Team to ensure performance and reliability.',
         icon: Compass,
     },
     {
         number: '05',
         title: 'Project Launch',
         description:
-            'Final launch and delivery completed by Blink Technologiz Team with quality checks and client readiness.',
+            'Final launch and delivery completed by Lumina Team with quality checks and client readiness.',
         icon: Rocket,
     },
 ]

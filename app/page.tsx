@@ -11,7 +11,7 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import Journey from '@/components/Journey'
 import Process from '@/components/Process'
-import Innovation from '@/components/Innovation'
+import Booking from '@/components/Booking'
 import Testimonials from '@/components/Testimonials'
 
 
@@ -29,7 +29,7 @@ export default function Home() {
       <Journey />
       <Skills />
       <Process />
-      <Innovation />
+      <Booking />
       <Projects />
       <Testimonials />
       <Contact />
