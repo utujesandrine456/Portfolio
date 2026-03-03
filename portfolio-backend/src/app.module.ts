@@ -5,6 +5,7 @@ import { ContactModule } from './contact/contact.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { BookingModule } from './booking/booking.module';
 
 
 @Module({
@@ -32,7 +33,9 @@ import { ThrottlerModule } from '@nestjs/throttler';
           limit: 5
         }
       ]
-    })
+    }),
+
+    BookingModule
  ]
 })
 
