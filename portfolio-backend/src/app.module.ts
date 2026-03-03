@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ContactModule } from './contact/contact.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule } from '@nestjs/config';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 
 @Module({
@@ -22,7 +23,17 @@ import { ConfigModule } from '@nestjs/config';
       }
     }),
 
-    ContactModule
+    ContactModule,
+
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000,
+          limit: 5
+        }
+      ]
+    })
  ]
 })
+
 export class AppModule {}

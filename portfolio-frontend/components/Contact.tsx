@@ -3,6 +3,12 @@
 import { motion } from 'framer-motion'
 import { useState, FormEvent } from 'react'
 import { Send, Mail, MapPin, Phone } from 'lucide-react'
+import DOMPurify from 'dompurify';
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify"
+
+const API_URL = process.env.NEXT_PUBLIC_API;
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,12 +20,58 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
+    if (isSubmitting) return
+
     setIsSubmitting(true)
 
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    console.log('Form submitted:', formData)
-    alert('Thank you for reaching out! I will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+    const controller = new AbortController()
+
+    const timeout = setTimeout(() => {
+      controller.abort()
+    }, 8000)
+
+    try {
+      const safeData = {
+        name: DOMPurify.sanitize(formData.name),
+        email: DOMPurify.sanitize(formData.email),
+        message: DOMPurify.sanitize(formData.message),
+      }
+
+      const response = await fetch(`${API_URL}/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(safeData),
+        signal: controller.signal
+      })
+
+      clearTimeout(timeout)
+
+      if (!response.ok) {
+        throw new Error("Server error")
+      }
+
+      await response.json()
+
+      toast.success("Message sent successfully")
+
+      setFormData({
+        name: "",
+        email: "",
+        message: ""
+      })
+
+    } catch (error: any) {
+      if(error.name === "AbortError"){
+        toast.error("Request timeout — Server is slow")
+      } else {
+        toast.error("Something went wrong")
+      }
+      console.error(error)
+    }
+
     setIsSubmitting(false)
   }
 
@@ -29,6 +81,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-32 bg-black text-white relative overflow-hidden">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <motion.div

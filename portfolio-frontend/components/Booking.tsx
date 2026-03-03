@@ -237,7 +237,7 @@ export default function Booking() {
                                                             disabled={isLocked}
                                                             onClick={() => { setSelectedDate(day); setStep(2) }}
                                                             className={`
-                                                                w-9 h-9 flex items-center justify-center rounded-full text-xs font-medium transition-all duration-150
+                                                                w-10 h-10 flex items-center justify-center rounded-full text-xs font-medium transition-all duration-150 my-2
                                                                 ${isLocked
                                                                     ? 'text-white/10 cursor-not-allowed'
                                                                     : isSelected
