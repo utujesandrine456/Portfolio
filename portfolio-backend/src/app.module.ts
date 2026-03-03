@@ -6,6 +6,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { BookingModule } from './booking/booking.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 
 @Module({
@@ -29,13 +30,15 @@ import { BookingModule } from './booking/booking.module';
     ThrottlerModule.forRoot({
       throttlers: [
         {
-          ttl: 60000,
+          ttl: 60,
           limit: 5
         }
       ]
     }),
 
-    BookingModule
+    BookingModule,
+
+    PrismaModule
  ]
 })
 

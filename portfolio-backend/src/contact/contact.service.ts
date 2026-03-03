@@ -10,7 +10,7 @@ export class ContactService {
 
         await this.mailerService.sendMail({
             to: process.env.EMAIL_USER,
-            from: data.email, 
+            from: data.email,
             subject: `Portfolio Message Form: ${data.name}`,
             html: `
                 <div style="font-family: Arial, sans-serif; padding:20px; background:#f4f6f9;">

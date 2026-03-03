@@ -7,6 +7,7 @@ import {
     Clock,
     Globe,
     User,
+    Mail,
     MessageSquare,
     ChevronLeft,
     ChevronRight,
@@ -41,6 +42,10 @@ export default function Booking() {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [formError, setFormError] = useState('')
+
     const daysInMonth = useMemo(() => getDaysInMonth(currentYear, currentMonth), [currentYear, currentMonth])
     const firstDay = useMemo(() => getFirstDayOfMonth(currentYear, currentMonth), [currentYear, currentMonth])
 
@@ -62,9 +67,22 @@ export default function Booking() {
         }
     }
 
-    const handleConfirm = () => {
-        setStep(3)
-        // In a real app, this would send data to a backend or service
+    const handleConfirmDetails = () => {
+        setFormError('')
+        if (!name.trim()) { setFormError('Please enter your name.'); return }
+        if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setFormError('Please enter a valid email address.'); return
+        }
+        setStep(4)
+    }
+
+    const handleReset = () => {
+        setStep(1)
+        setSelectedDate(null)
+        setSelectedTime(null)
+        setName('')
+        setEmail('')
+        setFormError('')
     }
 
     return (
@@ -102,6 +120,7 @@ export default function Booking() {
                                 <h3 className="text-xs font-bold uppercase tracking-[0.3em] text-white/30 mb-8">Session Details</h3>
 
                                 <div className="space-y-6">
+                                    {/* Date */}
                                     <div className="flex items-center gap-4 group">
                                         <div className={`p-3 rounded-xl border transition-all duration-300 ${step >= 1 ? 'border-cream/40 bg-cream/10 text-cream' : 'border-white/5 bg-white/5 text-white/20'}`}>
                                             <CalendarIcon size={18} />
@@ -114,6 +133,7 @@ export default function Booking() {
                                         </div>
                                     </div>
 
+                                    {/* Time */}
                                     <div className="flex items-center gap-4 group">
                                         <div className={`p-3 rounded-xl border transition-all duration-300 ${selectedTime ? 'border-cream/40 bg-cream/10 text-cream' : 'border-white/5 bg-white/5 text-white/20'}`}>
                                             <Clock size={18} />
@@ -126,6 +146,7 @@ export default function Booking() {
                                         </div>
                                     </div>
 
+                                    {/* Meeting type */}
                                     <div className="flex items-center gap-4 group">
                                         <div className="p-3 rounded-xl border border-cream/40 bg-cream/10 text-cream">
                                             {meetingType === 'online' ? <Video size={18} /> : <MapPin size={18} />}
@@ -137,17 +158,44 @@ export default function Booking() {
                                             </p>
                                         </div>
                                     </div>
+
+                                    {/* Name (visible from step 3 onward) */}
+                                    {step >= 3 && name && (
+                                        <div className="flex items-center gap-4 group">
+                                            <div className="p-3 rounded-xl border border-cream/40 bg-cream/10 text-cream">
+                                                <User size={18} />
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Name</p>
+                                                <p className="text-sm font-mono text-white">{name}</p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Email (visible from step 3 onward) */}
+                                    {step >= 3 && email && (
+                                        <div className="flex items-center gap-4 group">
+                                            <div className="p-3 rounded-xl border border-cream/40 bg-cream/10 text-cream">
+                                                <Mail size={18} />
+                                            </div>
+                                            <div>
+                                                <p className="text-[10px] uppercase tracking-widest text-white/30 mb-1">Email</p>
+                                                <p className="text-sm font-mono text-white">{email}</p>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
+                                {/* CTA: advance from time step → details step */}
                                 {step === 2 && (
                                     <motion.button
                                         initial={{ opacity: 0, y: 10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        onClick={handleConfirm}
+                                        onClick={() => selectedDate && selectedTime && setStep(3)}
                                         disabled={!selectedDate || !selectedTime}
                                         className="w-full mt-10 py-4 bg-cream text-black font-bold uppercase tracking-widest text-xs rounded-xl hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-30 disabled:grayscale"
                                     >
-                                        Confirm Booking
+                                        Continue →
                                     </motion.button>
                                 )}
                             </div>
@@ -160,8 +208,11 @@ export default function Booking() {
                             </div>
                         </div>
 
+                        {/* Main content panel */}
                         <div className="lg:col-span-8 order-1 lg:order-2">
                             <AnimatePresence mode="wait">
+
+                                {/* ── STEP 1: Pick a date ── */}
                                 {step === 1 && (
                                     <motion.div
                                         key="step1"
@@ -263,6 +314,7 @@ export default function Booking() {
                                     </motion.div>
                                 )}
 
+                                {/* ── STEP 2: Pick a time ── */}
                                 {step === 2 && (
                                     <motion.div
                                         key="step2"
@@ -295,9 +347,87 @@ export default function Booking() {
                                     </motion.div>
                                 )}
 
+                                {/* ── STEP 3: Enter name & email ── */}
                                 {step === 3 && (
                                     <motion.div
                                         key="step3"
+                                        initial={{ opacity: 0, x: 20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -20 }}
+                                        className="space-y-8"
+                                    >
+                                        <button
+                                            onClick={() => setStep(2)}
+                                            className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/30 hover:text-cream transition-colors"
+                                        >
+                                            <ChevronLeft size={14} /> Choose a different time
+                                        </button>
+
+                                        <div className="p-8 rounded-2xl border border-white/8 bg-white/[0.02] space-y-6">
+                                            <div>
+                                                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 mb-1">Almost there</p>
+                                                <h3 className="text-xl font-bold text-white">Your Details</h3>
+                                                <p className="text-white/30 text-sm mt-1 font-light">We'll use this to send your booking confirmation.</p>
+                                            </div>
+
+                                            {/* Name field */}
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/40">Full Name</label>
+                                                <div className="relative">
+                                                    <User size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" />
+                                                    <input
+                                                        type="text"
+                                                        value={name}
+                                                        onChange={e => setName(e.target.value)}
+                                                        placeholder="Sandra Uwamahoro"
+                                                        className="w-full pl-10 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-cream/40 focus:bg-white/[0.04] transition-all"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {/* Email field */}
+                                            <div className="space-y-2">
+                                                <label className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/40">Email Address</label>
+                                                <div className="relative">
+                                                    <Mail size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 pointer-events-none" />
+                                                    <input
+                                                        type="email"
+                                                        value={email}
+                                                        onChange={e => setEmail(e.target.value)}
+                                                        placeholder="hello@example.com"
+                                                        className="w-full pl-10 pr-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-cream/40 focus:bg-white/[0.04] transition-all"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {/* Error */}
+                                            {formError && (
+                                                <motion.p
+                                                    initial={{ opacity: 0, y: -4 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    className="text-red-400/80 text-xs tracking-wide"
+                                                >
+                                                    {formError}
+                                                </motion.p>
+                                            )}
+
+                                            {/* Submit */}
+                                            <motion.button
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
+                                                onClick={handleConfirmDetails}
+                                                className="w-full py-4 bg-cream text-black font-bold uppercase tracking-widest text-xs rounded-xl transition-all"
+                                            >
+                                                Confirm Booking
+                                            </motion.button>
+                                        </div>
+                                    </motion.div>
+                                )}
+
+                                {/* ── STEP 4: Confirmation ── */}
+                                {step === 4 && (
+                                    <motion.div
+                                        key="step4"
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         className="p-12 rounded-3xl border border-cream/20 bg-cream/[0.02] text-center"
@@ -306,11 +436,14 @@ export default function Booking() {
                                             <CheckCircle2 size={40} />
                                         </div>
                                         <h3 className="text-3xl font-bold text-white mb-4">You're all set.</h3>
-                                        <p className="text-white/40 max-w-sm mx-auto text-sm leading-relaxed mb-10">
-                                            Your session has been booked for <span className="text-white">{selectedTime}</span> on <span className="text-white">{selectedDate} {MONTHS[currentMonth]}</span>. You'll receive a confirmation shortly.
+                                        <p className="text-white/40 max-w-sm mx-auto text-sm leading-relaxed mb-3">
+                                            Your session has been booked for <span className="text-white">{selectedTime}</span> on <span className="text-white">{selectedDate} {MONTHS[currentMonth]}</span>.
+                                        </p>
+                                        <p className="text-white/30 max-w-sm mx-auto text-sm leading-relaxed mb-10">
+                                            A confirmation will be sent to <span className="text-cream">{email}</span>.
                                         </p>
                                         <button
-                                            onClick={() => { setStep(1); setSelectedDate(null); setSelectedTime(null) }}
+                                            onClick={handleReset}
                                             className="text-[10px] font-bold uppercase tracking-[0.4em] text-cream hover:text-white transition-all underline underline-offset-8"
                                         >
                                             Book Another Session
