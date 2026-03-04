@@ -4,9 +4,10 @@ import { motion } from 'framer-motion'
 import { useState, FormEvent } from 'react'
 import { Send, Mail, MapPin, Phone } from 'lucide-react'
 import DOMPurify from 'dompurify';
-import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { toast } from "react-toastify"
+
+
 
 const API_URL = process.env.NEXT_PUBLIC_API;
 
@@ -81,7 +82,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-32 bg-black text-white relative overflow-hidden">
-      <ToastContainer position="top-right" autoClose={3000} />
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <motion.div

@@ -13,6 +13,8 @@ import Journey from '@/components/Journey'
 import Process from '@/components/Process'
 import Booking from '@/components/Booking'
 import Testimonials from '@/components/Testimonials'
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 
 export default function Home() {
@@ -22,6 +24,7 @@ export default function Home() {
 
   return (
     <main className="relative bg-black">
+      <ToastContainer position="top-right" autoClose={3000} />
       <Loader />
       <Navigation />
       <Hero />

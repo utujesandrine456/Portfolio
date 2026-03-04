@@ -8,17 +8,19 @@ import {
     Globe,
     User,
     Mail,
-    MessageSquare,
     ChevronLeft,
     ChevronRight,
     CheckCircle2,
     Shield,
-    Zap,
     MapPin,
     Video
 } from 'lucide-react'
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+import { toast } from "react-toastify"
 
 
+const API = process.env.NEXT_PUBLIC_API
 
 const DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
 const MONTHS = [
@@ -41,6 +43,7 @@ export default function Booking() {
     const [meetingType, setMeetingType] = useState<'online' | 'physical'>('online')
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+    const [loading, setLoading] = useState(false)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -67,17 +70,45 @@ export default function Booking() {
         }
     }
 
-    const handleConfirmDetails = () => {
-        setFormError('')
-        if (!name.trim()) { setFormError('Please enter your name.'); return }
-        if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            setFormError('Please enter a valid email address.'); return
+    const handleSubmitBooking = async() => {
+        setLoading(true)
+
+        try{
+            const response = await fetch(`${API}/booking`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    date: `${selectedDate} ${MONTHS[currentMonth]} ${currentYear}`,
+                    time: selectedTime,
+                    meetingType,
+                }),
+            })
+
+            if(!response.ok){
+                throw new Error('Failed to book a call')
+            }
+
+            await response.json()
+
+            toast.success('Booking confirmed successfully')
+
+            setStep(4);
+        }catch(error: any){
+            console.log(error)
+            setFormError(error.message)
+            toast.error(error.message)
+        }finally{
+            setLoading(false)
         }
-        setStep(4)
     }
 
     const handleReset = () => {
         setStep(1)
+
         setSelectedDate(null)
         setSelectedTime(null)
         setName('')
@@ -87,7 +118,6 @@ export default function Booking() {
 
     return (
         <section id="booking" className="relative min-h-screen w-full bg-black py-32 overflow-hidden selection:bg-cream/30">
-            {/* Ambient Background */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cream/[0.03] rounded-full blur-[120px]" />
                 <div className="absolute bottom-0 right-0 w-px h-[500px] bg-gradient-to-t from-cream/20 to-transparent opacity-20" />
@@ -415,10 +445,10 @@ export default function Booking() {
                                             <motion.button
                                                 whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.98 }}
-                                                onClick={handleConfirmDetails}
+                                                onClick={handleSubmitBooking}
                                                 className="w-full py-4 bg-cream text-black font-bold uppercase tracking-widest text-xs rounded-xl transition-all"
                                             >
-                                                Confirm Booking
+                                                {loading ? 'Booking...' : 'Confirm Booking'}
                                             </motion.button>
                                         </div>
                                     </motion.div>
