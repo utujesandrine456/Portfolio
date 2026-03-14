@@ -56,7 +56,7 @@ export default function Navigation() {
   return (
     <>
       <div className="fixed top-6 inset-x-0 z-[100] flex justify-center px-4 pointer-events-none">
-        <nav className={`pointer-events-auto transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-xl shadow-2xl border-white/10 py-2' : 'bg-transparent border-cream/30 py-3'} border rounded-md px-2 flex items-center justify-between min-w-[300px] md:min-w-0`}>
+        <nav className={`pointer-events-auto transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-xl shadow-2xl border-white/10 py-2' : 'bg-transparent border-cream/10 py-3'} border rounded-md px-2 flex items-center justify-between min-w-[300px] md:min-w-0`}>
           <div className="hidden md:block w-px h-5 bg-white/10 mr-2" />
           <ul className="hidden md:flex items-center gap-2">
             {navItems.map((item) => (
