@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
     Calendar as CalendarIcon,
     Clock,
-    Globe,
     User,
     Mail,
     ChevronLeft,

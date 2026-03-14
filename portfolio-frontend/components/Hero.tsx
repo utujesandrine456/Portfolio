@@ -65,7 +65,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-start overflow-hidden bg-black ml-8"
+      className="relative min-h-screen flex items-center justify-start overflow-hidden bg-gradient-to-br from-black via-gray-900 to-black ml-8"
     >
       <ThreeBackground />
       <div className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-12 px-2 pt-20">

@@ -160,14 +160,19 @@ export default function RotatingServiceCards() {
                     <div className="flex justify-center mb-6">
                       <div className="relative">
                         <motion.div
-                          className="absolute inset-0 blur-2xl opacity-40 rounded-full bg-cream/30"
-                          animate={{ scale: hoveredId === service.id ? 1.5 : 1 }}
+                          className="absolute inset-0 blur-3xl opacity-20 rounded-full bg-cream"
+                          animate={{
+                            scale: hoveredId === service.id ? [1, 1.4, 1.2] : 1,
+                            opacity: hoveredId === service.id ? 0.4 : 0.1
+                          }}
+                          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
                         />
-                        <div className={`relative w-20 h-20 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center group transition-all duration-500 overflow-hidden`}>
-                          <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className={`relative w-24 h-24 rounded-[2rem] bg-gradient-to-br from-white/10 to-transparent border border-white/20 flex items-center justify-center group transition-all duration-700 overflow-hidden backdrop-blur-md shadow-2xl`}>
+                          <div className="absolute inset-0 bg-cream/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          <div className="absolute -inset-full bg-gradient-to-tr from-transparent via-white/10 to-transparent rotate-45 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
                           <service.icon
-                            size={32}
-                            className="text-cream transition-transform duration-500 group-hover:scale-110"
+                            size={38}
+                            className="text-cream transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 drop-shadow-[0_0_8px_rgba(218,197,167,0.5)]"
                           />
                         </div>
                       </div>
