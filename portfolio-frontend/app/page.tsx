@@ -15,6 +15,7 @@ import Journey from '@/components/Journey'
 import Process from '@/components/Process'
 import Booking from '@/components/Booking'
 import Testimonials from '@/components/Testimonials'
+import StatsShowcase from '@/components/StatsShowcase'
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -56,6 +57,7 @@ export default function Home() {
         <Navigation />
         <Hero />
         <About />
+        <StatsShowcase />
         <Journey />
         <Skills />
         <Process />
