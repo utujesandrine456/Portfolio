@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Code2, Database, Shield, Layout, ArrowRight, Plus } from 'lucide-react'
+import { Code2, Database, Shield, Server, ArrowRight, Plus } from 'lucide-react'
 
 const services = [
   {
@@ -10,19 +10,11 @@ const services = [
     title: 'Frontend & Mobile',
     subtitle: 'APPS & WEB',
     description:
-      'React, Next.js, React Native, Flutter – Crafting fast, responsive, and user-focused web and mobile applications.',
+      'React, Next.js, React Native, – Crafting fast, responsive, and user-focused web and mobile applications.',
     icon: Code2,
   },
   {
     id: 2,
-    title: 'UI / UX Design',
-    subtitle: 'INTERFACES',
-    description:
-      'Designing intuitive, visually engaging interfaces with a strong focus on usability, accessibility, and user experience.',
-    icon: Layout,
-  },
-  {
-    id: 3,
     title: 'System Hardening',
     subtitle: 'SECURITY',
     description:
@@ -30,13 +22,21 @@ const services = [
     icon: Shield,
   },
   {
-    id: 4,
+    id: 3,
     title: 'Database Design',
     subtitle: 'SCALABILITY',
     description:
       'Designing efficient, scalable, and well-structured databases optimized for performance and reliability.',
     icon: Database,
   },
+  {
+    id: 4,
+    title: 'Backend Development',
+    subtitle: 'SERVER LOGIC',
+    description:
+      'Building secure, scalable, and high-performance backend systems, APIs, and server-side applications.',
+    icon: Server,
+  }
 ]
 
 export default function RotatingServiceCards() {
@@ -187,15 +187,6 @@ export default function RotatingServiceCards() {
                         {service.description}
                       </p>
                     </div>
-
-                    {/* Footer / CTA */}
-                    <motion.div
-                      className="mt-6 flex items-center justify-center gap-2 text-cream text-[11px] font-bold tracking-widest uppercase"
-                      animate={{ y: hoveredId === service.id ? 0 : 10, opacity: hoveredId === service.id ? 1 : 0 }}
-                    >
-                      Explore More
-                      <ArrowRight size={14} />
-                    </motion.div>
                   </div>
 
                   {/* Corner Bits */}

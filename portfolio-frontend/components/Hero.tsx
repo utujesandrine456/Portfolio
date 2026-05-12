@@ -82,10 +82,7 @@ export default function Hero() {
             ref={subtitleRef}
             className="text-lg md:text-xl mb-12 text-white/80 leading-relaxed"
           >
-            Full-Stack Developer & Ethical Hacker building strong, scalable
-            applications with clean code, secure design, always keeping
-            systems safe, grabbing every opportunity to create and protect
-            the software I work on.
+            Frontend Developer & Ethical Hacker building modern, scalable, and secure applications with clean code and strong system design, focused on creating reliable software while protecting systems and improving security at every stage.
           </p>
 
           <div className="flex flex-wrap gap-6 mb-16">
