@@ -46,6 +46,7 @@ export default function Projects() {
                     className="object-contain p-6 md:p-10 opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
+                    unoptimized
                   />
                 </div>
               </div>
@@ -162,6 +163,7 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
             fill
             className="object-contain p-3"
             sizes="(max-width: 768px) 100vw, 160px"
+            unoptimized
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
             <div className="w-10 h-10 rounded-full bg-cream text-black flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300 shadow-lg">
