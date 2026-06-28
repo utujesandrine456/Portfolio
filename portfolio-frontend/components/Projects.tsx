@@ -29,7 +29,7 @@ export default function Projects() {
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left: Featured Visual */}
-          <div className="relative lg:sticky lg:top-28 h-[480px] lg:h-[560px]">
+          <div className="relative lg:sticky lg:top-28 h-[320px] lg:h-[440px]">
             <button
               type="button"
               onClick={() => setIsVideoOpen(true)}
@@ -85,11 +85,11 @@ export default function Projects() {
             >
               <a
                 href="/projects"
-                className="group flex items-center gap-4 px-8 py-4 rounded-full border border-cream/30 hover:bg-cream hover:text-black transition-all duration-500 text-lg font-medium magnetic"
+                className="group flex items-center gap-4 px-6 py-2 rounded-full border border-cream/30 hover:bg-cream hover:text-black transition-all duration-500 text-sm font-medium magnetic"
               >
                 Explore All Projects
                 <div className="w-10 h-10 rounded-full bg-cream/10 flex items-center justify-center group-hover:bg-black/10 transition-colors">
-                  <ArrowUpRight size={20} />
+                  <ArrowUpRight size={16} />
                 </div>
               </a>
             </motion.div>
@@ -132,7 +132,7 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className={`group relative p-8 rounded-2xl border transition-all duration-500 cursor-pointer ${isActive
+      className={`group relative p-6 rounded-2xl border transition-all duration-500 cursor-pointer ${isActive
         ? 'bg-white/[0.06] border-cream/30 shadow-[0_20px_60px_rgba(218,197,167,0.15)]'
         : 'bg-white/[0.02] border-white/5 hover:border-white/10 hover:bg-white/[0.04]'
         }`}
@@ -173,11 +173,11 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
         <div className="space-y-4">
           <div>
             <p className="text-xs text-cream uppercase tracking-widest mb-2">{project.category}</p>
-            <h3 className="text-3xl font-bold mb-1">{project.title}</h3>
-            <p className="text-white/50 text-sm">{project.subtitle}</p>
+            <h3 className="text-2xl font-bold mb-1">{project.title}</h3>
+            <p className="text-white/50 text-xs">{project.subtitle}</p>
           </div>
 
-          <p className="text-white/70 leading-relaxed">{project.description}</p>
+          <p className="text-white/70 text-xs leading-relaxed">{project.description}</p>
 
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech: string) => (
@@ -195,7 +195,7 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cream/30 rounded-lg transition-all duration-300 text-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cream/30 rounded-md transition-all duration-300 text-xs"
             >
               <Github size={16} />
               <span>Code</span>
@@ -204,7 +204,7 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-cream text-black hover:bg-cream/90 rounded-lg transition-all duration-300 text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-2 bg-cream text-black hover:bg-cream/90 rounded-md transition-all duration-300 text-xs font-medium"
             >
               <span>Live Demo</span>
               <ArrowUpRight size={16} />
@@ -267,7 +267,7 @@ function ProjectVideoModal({
                   </div>
                   <button
                     onClick={onClose}
-                    className="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 transition-all font-bold text-sm tracking-widest uppercase"
+                    className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 transition-all font-bold text-xs uppercase"
                   >
                     Close
                   </button>
