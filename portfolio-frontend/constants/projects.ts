@@ -16,7 +16,7 @@ export const projects = [
         description: "A smart food booking system that allows users to order food in advance, pay online, and receive a receipt. All orders are approved by an admin before preparation.",
         image: "/Aroena.png",
         videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-        category: "Health & Wellness",
+        category: "Hotel Management System",
         technologies: ["React Native", "Prisma", "Nest Js", "PostgreSQL"],
         liveUrl: "",
         githubUrl: "https://github.com/utujesandrine456/Aroena"
