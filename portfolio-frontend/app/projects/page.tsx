@@ -147,7 +147,7 @@ export default function AllProjectsPage() {
                                         </div>
                                         <button
                                             onClick={() => setSelectedProject(null)}
-                                            className="p-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 transition-all font-bold text-sm tracking-widest uppercase"
+                                            className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/60 transition-all font-bold text-xs uppercase"
                                         >
                                             Close
                                         </button>
