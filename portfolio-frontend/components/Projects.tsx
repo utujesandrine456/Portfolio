@@ -33,23 +33,18 @@ export default function Projects() {
             <button
               type="button"
               onClick={() => setIsVideoOpen(true)}
-              className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-br from-white/5 via-black to-black border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.35)] text-left group focus:outline-none focus:ring-2 focus:ring-cream/40"
+              className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-[0_30px_80px_rgba(0,0,0,0.35)] text-left group focus:outline-none focus:ring-2 focus:ring-cream/40"
               aria-label={`Open ${projects[activeProject].title} video preview`}
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(218,197,167,0.08),transparent_45%),radial-gradient(circle_at_80%_0%,rgba(218,197,167,0.05),transparent_40%)] pointer-events-none" />
-              <div className="absolute inset-0 p-8 md:p-12">
-                <div className="relative w-full h-full rounded-2xl overflow-hidden bg-black/40 border border-white/10 group-hover:border-cream/20 transition-colors duration-500">
-                  <Image
-                    src={projects[activeProject].image}
-                    alt={projects[activeProject].title}
-                    fill
-                    className="object-contain p-6 md:p-10 opacity-95 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority
-                    unoptimized
-                  />
-                </div>
-              </div>
+              <Image
+                src={projects[activeProject].image}
+                alt={projects[activeProject].title}
+                fill
+                className="object-cover opacity-95 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-700"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+                unoptimized
+              />
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-300">
                 <div className="w-16 h-16 rounded-full bg-cream text-black flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.5)] scale-90 group-hover:scale-100 transition-all duration-500">
                   <Play size={28} fill="currentColor" />
@@ -161,7 +156,7 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
             src={project.image}
             alt={`${project.title} preview`}
             fill
-            className="object-contain p-3"
+            className="object-cover"
             sizes="(max-width: 768px) 100vw, 160px"
             unoptimized
           />

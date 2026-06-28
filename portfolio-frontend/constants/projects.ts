@@ -1,21 +1,19 @@
 export const projects = [
     {
         id: 1,
-        title: "TradeWise",
-        subtitle: "Trading & Finance",
-        description: "A comprehensive trading platform with real-time market data, portfolio management, and advanced analytics.",
-        image: "/TradeWise_overview.png",
+        title: "TradeWise AI",
+        subtitle: "Trading & Logistics",
+        description: "TradeWise is an AI-powered platform that uses machine learning to predict whether market prices are likely to go up or down. It helps traders make better decisions.",
+        image: "/TradeWise.png",
         videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
-        category: "Trading & Finance",
-        technologies: ["React.js", "Nest.js", "Prisma", "PostgreSQL"],
-        liveUrl: "https://tradewise-cyan.vercel.app/",
-        githubUrl: "https://github.com/utujesandrine456/TradeWise"
+        category: "Trading & Logistics",
+        technologies: ["React Native", "Nest.js", "Prisma", "PostgreSQL"],
     },
     {
         id: 2,
         title: "Aroena",
         subtitle: "Hotel Management System",
-        description: "A smart food management system to reduce waste and suggest recipes.",
+        description: "A smart food booking system that allows users to order food in advance, pay online, and receive a receipt. All orders are approved by an admin before preparation.",
         image: "/Aroena.png",
         videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
         category: "Health & Wellness",
@@ -25,14 +23,13 @@ export const projects = [
     },
     {
         id: 3,
-        title: "Mentora",
-        subtitle: "Online Camps & Conference Platform",
-        description: "Mentora is an Angular-based web application that enables students to access online camps and conferences remotely. Users can attend live sessions, submit assignments, and actively participate through comments and discussions.",
-        image: "/Aroena.png",
+        title: "Industrial Attachment Program",
+        subtitle: "Intership Management System",
+        description: "IAP is a web-based Industrial Attachment Management System that helps students find internships, connect with professional mentors, gain real-world experience, and prepare for successful careers.",
+        image: "/IAP.png",
         videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
         category: "Education Technology",
-        technologies: ["Angular", "TypeScript", "NestJS", "PostgreSQL"],
-        liveUrl: "",
-        githubUrl: "https://github.com/utujesandrine456/Mentora"
+        technologies: ["Next.js", "TypeScript", "Tailwind CSS","Nest Js", "PostgreSQL"],
+        liveUrl: "https://iap.innov.rw/",
     }
 ]
