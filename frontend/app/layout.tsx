@@ -14,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="font-sans">
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className="font-sans bg-black text-[#DAC5A7] antialiased">
         <ThemeProvider>
           <CustomCursor />
           {children}

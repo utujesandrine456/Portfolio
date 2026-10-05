@@ -5,6 +5,12 @@
 @tailwind utilities;
 
 :root {
+  --foreground-rgb: 218, 197, 167;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+.light {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
@@ -20,7 +26,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {
@@ -64,7 +69,8 @@ html {
 
 body {
   color: rgb(var(--foreground-rgb));
-  font-family: 'Afacad';
+  background-color: rgb(var(--background-start-rgb));
+  font-family: 'Afacad', ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
