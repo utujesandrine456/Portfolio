@@ -26,7 +26,7 @@ export default function About() {
 
             <div className="space-y-8 text-xl leading-loose text-white/80 font-light">
               <p>
-                I am a <span className="text-cream font-normal">Software Developer</span> currently studying at Rwanda Coding Academy with a passion for building scalable, high-performance applications. I focus on clean, maintainable code and designing systems that are both functional and secure.
+                I am the <span className="text-cream font-normal">CEO of AVENOR 10X Technologies</span> and a <span className="text-cream font-normal">Software Developer</span> currently studying at Rwanda Coding Academy with a passion for building smarter systems for business and scalable, high-performance applications. I focus on clean, maintainable code and designing systems that are both functional and secure.
               </p>
 
               <p>
@@ -59,6 +59,7 @@ export default function About() {
                   className="object-cover object-center grayscale group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-700 ease-out"
                   sizes="(max-width: 768px) 100vw, 30vw"
                   priority
+                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 z-10" />
               </div>

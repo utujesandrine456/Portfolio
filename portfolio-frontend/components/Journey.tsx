@@ -28,6 +28,12 @@ const journeyData = [
     description:
       'Designed scalable databases and system architectures for personal projects, collaborations, and real-world problem-solving.',
   },
+  {
+    year: 'Present',
+    title: 'CEO at AVENOR 10X Technologies',
+    description:
+      'Leading technology initiatives to build smarter systems for business, integrating scalable full-stack engineering and cybersecurity best practices.',
+  },
 ]
 
 

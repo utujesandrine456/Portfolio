@@ -2,14 +2,16 @@
 
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
-import { ArrowUpRight, Github, Play, ChevronRight } from 'lucide-react'
+import { ArrowUpRight, Github, Play, ChevronRight, FileText } from 'lucide-react'
 import Image from 'next/image'
 
 import { projects } from '@/constants/projects'
+import ResearchPaperModal from './ResearchPaperModal'
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(0)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
+  const [isPaperOpen, setIsPaperOpen] = useState(false)
 
   return (
     <section id="projects" className="min-h-screen bg-black text-white py-24 relative">
@@ -73,6 +75,10 @@ export default function Projects() {
                     setActiveProject(index)
                     setIsVideoOpen(true)
                   }}
+                  onOpenResearchPaper={() => {
+                    setActiveProject(index)
+                    setIsPaperOpen(true)
+                  }}
                 />
               ))}
             </div>
@@ -104,17 +110,30 @@ export default function Projects() {
         title={projects[activeProject].title}
         subtitle={projects[activeProject].subtitle}
         videoUrl={projects[activeProject].videoUrl}
+        researchPaperUrl={projects[activeProject].researchPaperUrl}
+        onOpenResearchPaper={() => {
+          setIsVideoOpen(false)
+          setIsPaperOpen(true)
+        }}
+      />
+
+      <ResearchPaperModal
+        open={isPaperOpen}
+        onClose={() => setIsPaperOpen(false)}
+        pdfUrl={projects[activeProject].researchPaperUrl || '/UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf'}
+        title={projects[activeProject].researchPaperTitle || 'TradeWise AI: An Event-Oriented Artificial Intelligence Framework for Predicting Irish Potato Price Changes in Rwanda'}
       />
     </section>
   )
 }
 
-function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
+function ProjectItem({ project, index, isActive, onActivate, onOpenVideo, onOpenResearchPaper }: {
   project: any;
   index: number;
   isActive: boolean;
   onActivate: () => void;
   onOpenVideo: () => void;
+  onOpenResearchPaper: () => void;
 }) {
   const ref = useRef(null)
   const inView = useInView(ref, { margin: "-40% 0px -40% 0px" })
@@ -190,25 +209,48 @@ function ProjectItem({ project, index, isActive, onActivate, onOpenVideo }: {
             ))}
           </div>
 
-          <div className="flex gap-3 pt-4">
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cream/30 rounded-md transition-all duration-300 text-xs"
-            >
-              <Github size={16} />
-              <span>Code</span>
-            </a>
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-cream text-black hover:bg-cream/90 rounded-md transition-all duration-300 text-xs font-medium"
-            >
-              <span>Live Demo</span>
-              <ArrowUpRight size={16} />
-            </a>
+          <div className="flex flex-wrap gap-3 pt-3">
+            {project.researchPaperUrl ? (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onOpenResearchPaper()
+                }}
+                className="group/btn inline-flex items-center gap-2.5 px-5 py-2.5 bg-cream text-black hover:bg-[#ebd8c0] font-semibold rounded-sm text-xs tracking-wide shadow-[0_10px_25px_rgba(218,197,167,0.25)] hover:shadow-[0_15px_35px_rgba(218,197,167,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+              >
+                <FileText size={15} />
+                <span>Explore More</span>
+                <ArrowUpRight size={15} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-300" />
+              </button>
+            ) : (
+              <>
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cream/30 rounded-sm transition-all duration-300 text-xs text-white"
+                  >
+                    <Github size={16} />
+                    <span>Code</span>
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center gap-2 px-4 py-2 bg-cream text-black hover:bg-cream/90 rounded-sm transition-all duration-300 text-xs font-medium"
+                  >
+                    <span>Live Demo</span>
+                    <ArrowUpRight size={16} />
+                  </a>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -222,12 +264,16 @@ function ProjectVideoModal({
   title,
   subtitle,
   videoUrl,
+  researchPaperUrl,
+  onOpenResearchPaper,
 }: {
   open: boolean
   onClose: () => void
   title: string
   subtitle: string
   videoUrl: string
+  researchPaperUrl?: string
+  onOpenResearchPaper?: () => void
 }) {
   useEffect(() => {
     if (!open) return
@@ -313,6 +359,16 @@ function ProjectVideoModal({
                 </div>
 
                 <div className="pt-10 space-y-3">
+                  {researchPaperUrl && onOpenResearchPaper && (
+                    <button
+                      type="button"
+                      onClick={onOpenResearchPaper}
+                      className="w-full py-3.5 rounded-2xl bg-cream/10 hover:bg-cream/20 border border-cream/30 text-cream font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all text-sm shadow-sm"
+                    >
+                      <FileText size={16} />
+                      Preview Research Paper (PDF)
+                    </button>
+                  )}
                   <button
                     onClick={onClose}
                     className="w-full py-4 rounded-2xl bg-cream text-black font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all text-sm"

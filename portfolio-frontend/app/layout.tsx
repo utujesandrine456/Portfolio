@@ -4,8 +4,8 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import CustomCursor from '@/components/CustomCursor'
 
 export const metadata: Metadata = {
-  title: 'UTUJE - Portfolio',
-  description: 'Professional Portfolio Website',
+  title: 'UWASE UTUJE Sandrine | CEO of AVENOR 10X Technologies',
+  description: 'CEO of AVENOR 10X Technologies, Frontend Developer & Ethical Hacker building smarter systems for business.',
 }
 
 export default function RootLayout({

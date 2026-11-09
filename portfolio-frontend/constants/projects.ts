@@ -8,6 +8,8 @@ export const projects = [
         videoUrl: "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
         category: "Trading & Logistics",
         technologies: ["React Native", "Nest.js", "Prisma", "PostgreSQL"],
+        researchPaperUrl: "/UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf",
+        researchPaperTitle: "TradeWise AI: An Event-Oriented Artificial Intelligence Framework for Predicting Irish Potato Price Changes in Rwanda",
     },
     {
         id: 2,

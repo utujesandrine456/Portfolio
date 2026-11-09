@@ -82,7 +82,7 @@ export default function Hero() {
             ref={subtitleRef}
             className="text-lg md:text-xl mb-12 text-white/80 leading-relaxed"
           >
-            Frontend Developer & Ethical Hacker building modern, scalable, and secure applications with clean code and strong system design, focused on creating reliable software while protecting systems and improving security at every stage.
+            CEO of <span className="text-cream font-medium">AVENOR 10X Technologies</span>, helping build smarter systems for business. Frontend Developer &amp; Ethical Hacker building modern, scalable, and secure applications with clean code and strong system design, focused on creating reliable software while protecting systems and improving security at every stage.
           </p>
 
           <div className="flex flex-wrap gap-6 mb-16">

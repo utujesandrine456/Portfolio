@@ -2,17 +2,19 @@
 
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowLeft, ArrowUpRight, Github, Play, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Github, Play, ChevronRight, FileText } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { projects } from '@/constants/projects'
 import CustomCursor from '@/components/CustomCursor'
+import ResearchPaperModal from '@/components/ResearchPaperModal'
 
 const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))]
 
 export default function AllProjectsPage() {
     const [activeCategory, setActiveCategory] = useState("All")
     const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null)
+    const [isPaperOpen, setIsPaperOpen] = useState(false)
 
     const filteredProjects = useMemo(() => {
         return activeCategory === "All"
@@ -108,10 +110,15 @@ export default function AllProjectsPage() {
                                         ))}
                                     </div>
                                     <button
-                                        onClick={() => setSelectedProject(project)}
+                                        onClick={() => {
+                                            setSelectedProject(project)
+                                            if (project.researchPaperUrl) {
+                                                setIsPaperOpen(true)
+                                            }
+                                        }}
                                         className="text-cream text-sm flex items-center gap-1 hover:gap-2 transition-all font-bold"
                                     >
-                                        View Story <ChevronRight size={16} />
+                                        {project.researchPaperUrl ? 'Research Paper' : 'View Story'} <ChevronRight size={16} />
                                     </button>
                                 </div>
                             </div>
@@ -192,20 +199,36 @@ export default function AllProjectsPage() {
                                     </div>
 
                                     <div className="pt-10 space-y-3">
-                                        <a
-                                            href={selectedProject.liveUrl}
-                                            target="_blank"
-                                            className="w-full py-4 rounded-2xl bg-cream text-black font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all text-sm"
-                                        >
-                                            Launch Interactive Demo <ArrowUpRight size={18} />
-                                        </a>
-                                        <a
-                                            href={selectedProject.githubUrl}
-                                            target="_blank"
-                                            className="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all text-sm"
-                                        >
-                                            <Github size={18} /> Source Repository
-                                        </a>
+                                        {selectedProject.researchPaperUrl ? (
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsPaperOpen(true)}
+                                                className="w-full py-4 rounded-2xl bg-cream text-black font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all text-sm shadow-md"
+                                            >
+                                                <FileText size={18} /> Explore Research Paper (PDF)
+                                            </button>
+                                        ) : (
+                                            <>
+                                                {selectedProject.liveUrl && (
+                                                    <a
+                                                        href={selectedProject.liveUrl}
+                                                        target="_blank"
+                                                        className="w-full py-4 rounded-2xl bg-cream text-black font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all text-sm"
+                                                    >
+                                                        Launch Interactive Demo <ArrowUpRight size={18} />
+                                                    </a>
+                                                )}
+                                                {selectedProject.githubUrl && (
+                                                    <a
+                                                        href={selectedProject.githubUrl}
+                                                        target="_blank"
+                                                        className="w-full py-4 rounded-2xl bg-white/5 border border-white/10 text-white font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all text-sm"
+                                                    >
+                                                        <Github size={18} /> Source Repository
+                                                    </a>
+                                                )}
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -213,6 +236,13 @@ export default function AllProjectsPage() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            <ResearchPaperModal
+                open={isPaperOpen}
+                onClose={() => setIsPaperOpen(false)}
+                pdfUrl={selectedProject?.researchPaperUrl || '/UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf'}
+                title={selectedProject?.researchPaperTitle || 'TradeWise AI: An Event-Oriented Artificial Intelligence Framework for Predicting Irish Potato Price Changes in Rwanda'}
+            />
         </main>
     )
 }
