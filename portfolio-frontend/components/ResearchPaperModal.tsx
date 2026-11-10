@@ -54,7 +54,7 @@ export default function ResearchPaperModal({
           onClick={onClose}
         >
           <motion.div
-            className="relative w-full max-w-5xl max-h-[92vh] flex flex-col bg-[#0b0b0b] border border-cream/20 rounded-2xl md:rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.85)] overflow-hidden"
+            className="relative w-full max-w-5xl max-h-[92vh] flex flex-col bg-[#0b0b0b] border border-cream/20 rounded-md md:rounded-xl shadow-[0_25px_80px_rgba(0,0,0,0.85)] overflow-hidden"
             initial={{ scale: 0.94, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.94, opacity: 0, y: 30 }}
@@ -98,7 +98,7 @@ export default function ResearchPaperModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-2.5 rounded-xl bg-white/5 hover:bg-cream hover:text-black border border-white/10 hover:border-cream text-white/70 transition-all duration-300"
+                  className="p-2.5 rounded-full bg-white/5 hover:bg-cream hover:text-black border border-white/10 hover:border-cream text-white/70 transition-all duration-300"
                   aria-label="Close modal"
                 >
                   <X size={18} />
@@ -107,11 +107,11 @@ export default function ResearchPaperModal({
 
               {/* View Switcher & Action Buttons */}
               <div className="flex flex-wrap items-center justify-between gap-3 pt-5 mt-2 border-t border-white/5">
-                <div className="inline-flex p-1 rounded-xl bg-white/5 border border-white/10">
+                <div className="inline-flex p-1 rounded-md bg-white/5 border border-white/10">
                   <button
                     type="button"
                     onClick={() => setActiveTab('overview')}
-                    className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
+                    className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
                       activeTab === 'overview'
                         ? 'bg-cream text-black font-semibold shadow-md'
                         : 'text-white/70 hover:text-white'
@@ -123,7 +123,7 @@ export default function ResearchPaperModal({
                   <button
                     type="button"
                     onClick={() => setActiveTab('pdf')}
-                    className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${
+                    className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
                       activeTab === 'pdf'
                         ? 'bg-cream text-black font-semibold shadow-md'
                         : 'text-white/70 hover:text-white'
@@ -139,7 +139,7 @@ export default function ResearchPaperModal({
                     href={pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cream/30 text-xs font-medium text-white/80 hover:text-cream transition-all duration-300"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cream/30 text-xs font-medium text-white/80 hover:text-cream transition-all duration-300"
                   >
                     <span>Open in New Tab</span>
                     <ExternalLink size={13} />
@@ -147,7 +147,7 @@ export default function ResearchPaperModal({
                   <a
                     href={pdfUrl}
                     download="UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-cream text-black hover:bg-cream/90 text-xs font-semibold shadow-sm transition-all duration-300"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-cream text-black hover:bg-cream/90 text-xs font-semibold shadow-sm transition-all duration-300"
                   >
                     <Download size={13} />
                     <span>Download PDF</span>
@@ -285,27 +285,27 @@ export default function ResearchPaperModal({
                         Evaluated across 11 eligible commercial markets in Rwanda from 163,271 raw market records (TangaBid/eSoko data-access export):
                       </p>
                       <div className="grid grid-cols-2 gap-2 text-[11px] text-white/80 pt-1">
-                        <div className="p-2 rounded-lg bg-black/40 border border-white/5 flex justify-between">
+                        <div className="p-2 rounded-md bg-black/40 border border-white/5 flex justify-between">
                           <span>Nyabugogo (Kigali)</span>
                           <span className="text-cream font-mono">273 obs (78.8%)</span>
                         </div>
-                        <div className="p-2 rounded-lg bg-black/40 border border-white/5 flex justify-between">
+                        <div className="p-2 rounded-md bg-black/40 border border-white/5 flex justify-between">
                           <span>Kibuye</span>
                           <span className="text-cream font-mono">261 obs (49.8%)</span>
                         </div>
-                        <div className="p-2 rounded-lg bg-black/40 border border-white/5 flex justify-between">
+                        <div className="p-2 rounded-md bg-black/40 border border-white/5 flex justify-between">
                           <span>Mulindi</span>
                           <span className="text-cream font-mono">189 obs (31.7%)</span>
                         </div>
-                        <div className="p-2 rounded-lg bg-black/40 border border-white/5 flex justify-between">
+                        <div className="p-2 rounded-md bg-black/40 border border-white/5 flex justify-between">
                           <span>Nyagatare</span>
                           <span className="text-cream font-mono">143 obs (38.5%)</span>
                         </div>
-                        <div className="p-2 rounded-lg bg-black/40 border border-white/5 flex justify-between">
+                        <div className="p-2 rounded-md bg-black/40 border border-white/5 flex justify-between">
                           <span>Kimironko</span>
                           <span className="text-cream font-mono">97 obs (62.9%)</span>
                         </div>
-                        <div className="p-2 rounded-lg bg-black/40 border border-white/5 flex justify-between">
+                        <div className="p-2 rounded-md bg-black/40 border border-white/5 flex justify-between">
                           <span>Musanze</span>
                           <span className="text-cream font-mono">90 obs (38.9%)</span>
                         </div>
@@ -317,7 +317,7 @@ export default function ResearchPaperModal({
                   </div>
 
                   {/* Switch to Full PDF CTA Banner */}
-                  <div className="p-5 rounded-2xl bg-gradient-to-r from-cream/15 via-cream/5 to-transparent border border-cream/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="p-5 rounded-lg bg-gradient-to-r from-cream/15 via-cream/5 to-transparent border border-cream/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="space-y-1">
                       <h4 className="text-sm font-bold text-white flex items-center gap-2">
                         <FileText size={16} className="text-cream" />
@@ -330,7 +330,7 @@ export default function ResearchPaperModal({
                     <button
                       type="button"
                       onClick={() => setActiveTab('pdf')}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cream text-black hover:bg-cream/90 font-semibold text-xs transition-all shadow-md shrink-0"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-cream text-black hover:bg-cream/90 font-semibold text-xs transition-all shadow-md shrink-0"
                     >
                       <span>Read Full Document Inside Viewer</span>
                       <BookOpen size={14} />
@@ -378,7 +378,7 @@ export default function ResearchPaperModal({
                 <a
                   href={pdfUrl}
                   download="UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-cream text-black hover:bg-cream/90 font-semibold transition-all shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-cream text-black hover:bg-cream/90 font-semibold transition-all shadow-sm"
                 >
                   <Download size={14} />
                   <span>Download Complete PDF</span>
