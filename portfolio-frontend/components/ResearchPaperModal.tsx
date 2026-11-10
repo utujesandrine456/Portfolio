@@ -16,7 +16,9 @@ import {
   CheckCircle2,
   Calendar,
   Building,
-  GraduationCap
+  GraduationCap,
+  Maximize2,
+  Minimize2
 } from 'lucide-react'
 
 interface ResearchPaperModalProps {
@@ -33,15 +35,25 @@ export default function ResearchPaperModal({
   title = 'TradeWise AI: An Event-Oriented Artificial Intelligence Framework for Predicting Irish Potato Price Changes in Rwanda',
 }: ResearchPaperModalProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'pdf'>('overview')
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   useEffect(() => {
-    if (!open) return
+    if (!open) {
+      setIsFullscreen(false)
+      return
+    }
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
+      if (e.key === 'Escape') {
+        if (isFullscreen) {
+          setIsFullscreen(false)
+        } else {
+          onClose()
+        }
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [open, onClose])
+  }, [open, onClose, isFullscreen])
 
   return (
     <AnimatePresence>
@@ -54,14 +66,19 @@ export default function ResearchPaperModal({
           onClick={onClose}
         >
           <motion.div
-            className="relative w-full max-w-5xl max-h-[92vh] flex flex-col bg-[#0b0b0b] border border-cream/20 rounded-md md:rounded-xl shadow-[0_25px_80px_rgba(0,0,0,0.85)] overflow-hidden"
+            className={`relative flex flex-col bg-[#0b0b0b] border border-cream/20 shadow-[0_25px_80px_rgba(0,0,0,0.85)] overflow-hidden transition-all duration-300 ${
+              isFullscreen
+                ? 'w-full h-full max-w-none max-h-none rounded-none'
+                : 'w-full max-w-5xl max-h-[92vh] rounded-md md:rounded-xl'
+            }`}
             initial={{ scale: 0.94, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.94, opacity: 0, y: 30 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
+            {/* Header - collapsed in fullscreen */}
+            {!isFullscreen && (
             <div className="flex flex-col border-b border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-5 sm:p-6">
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-2">
@@ -155,9 +172,51 @@ export default function ResearchPaperModal({
                 </div>
               </div>
             </div>
+            )}
+
+            {/* Fullscreen compact toolbar - shown only when fullscreen */}
+            {isFullscreen && (
+              <div className="flex items-center justify-between px-4 py-2.5 bg-[#0b0b0b] border-b border-white/10">
+                <div className="flex items-center gap-3">
+                  <FileText size={16} className="text-cream" />
+                  <span className="text-sm font-semibold text-cream truncate max-w-md">
+                    {title}
+                  </span>
+                  <span className="text-[10px] text-white/40 font-mono hidden sm:inline">
+                    UWASE UTUJE Sandrine
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={pdfUrl}
+                    download="UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-cream text-black hover:bg-cream/90 text-xs font-semibold transition-all"
+                  >
+                    <Download size={12} />
+                    <span>Download</span>
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setIsFullscreen(false)}
+                    className="p-2 rounded-md bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cream/30 text-white/70 hover:text-cream transition-all"
+                    aria-label="Exit fullscreen"
+                  >
+                    <Minimize2 size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="p-2 rounded-md bg-white/5 hover:bg-cream hover:text-black border border-white/10 hover:border-cream text-white/70 transition-all"
+                    aria-label="Close"
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* Content Body */}
-            <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6 custom-scrollbar">
+            <div className={`flex-1 overflow-y-auto space-y-6 custom-scrollbar ${isFullscreen ? 'p-0' : 'p-5 sm:p-7'}`}>
               {activeTab === 'overview' ? (
                 <div className="space-y-6">
                   {/* Key Highlights Metrics Grid */}
@@ -339,30 +398,49 @@ export default function ResearchPaperModal({
                 </div>
               ) : (
                 /* PDF Viewer Tab */
-                <div className="space-y-3">
-                  <div className="relative w-full h-[68vh] rounded-2xl overflow-hidden border border-white/10 bg-black shadow-inner">
+                <div className={`flex flex-col ${isFullscreen ? 'h-full' : 'space-y-3 px-5 sm:px-7 pb-5'}`}>
+                  {/* Fullscreen toggle bar (non-fullscreen mode) */}
+                  {!isFullscreen && (
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs text-white/40">Reading: Full Research Paper</span>
+                      <button
+                        type="button"
+                        onClick={() => setIsFullscreen(true)}
+                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-white/5 hover:bg-cream hover:text-black border border-white/10 hover:border-cream text-white/70 text-xs font-medium transition-all duration-300"
+                      >
+                        <Maximize2 size={14} />
+                        <span>Expand Fullscreen</span>
+                      </button>
+                    </div>
+                  )}
+                  <div className={`relative w-full overflow-hidden bg-black shadow-inner ${
+                    isFullscreen ? 'flex-1' : 'h-[68vh] rounded-2xl border border-white/10'
+                  }`}>
                     <iframe
                       src={`${pdfUrl}#toolbar=1&navpanes=0`}
                       className="w-full h-full border-0"
                       title="TradeWise AI Research Paper Document Viewer"
                     />
                   </div>
-                  <div className="flex items-center justify-between text-xs text-white/50 px-1">
-                    <span>Document: UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf</span>
-                    <a
-                      href={pdfUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-cream hover:underline flex items-center gap-1"
-                    >
-                      Open in external PDF reader <ExternalLink size={12} />
-                    </a>
-                  </div>
+                  {!isFullscreen && (
+                    <div className="flex items-center justify-between text-xs text-white/50 px-1">
+                      <span>Document: UWASE_UTUJE_Sandrine_TradeWise_AI_Research_Paper.pdf</span>
+                      <a
+                        href={pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cream hover:underline flex items-center gap-1"
+                      >
+                        Open in external PDF reader <ExternalLink size={12} />
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
 
-            {/* Modal Footer */}
+            {/* Modal Footer - hidden in fullscreen */}
+            {!isFullscreen && (
             <div className="p-4 sm:p-5 border-t border-white/10 bg-[#070707] flex flex-wrap items-center justify-between gap-3 text-xs text-white/50">
               <span className="font-mono text-[11px]">
                 Authored by UWASE UTUJE Sandrine · Rwanda Coding Academy
@@ -385,6 +463,7 @@ export default function ResearchPaperModal({
                 </a>
               </div>
             </div>
+            )}
           </motion.div>
         </motion.div>
       )}
