@@ -92,7 +92,7 @@ export default function ModernSkills() {
                             onClick={() => setActiveTab(category.id)}
                             className="relative px-8 py-3 rounded-md text-sm font-medium transition-all duration-300 group"
                         >
-                            <span className={`relative z-10 transition-colors duration-300 ${activeTab === category.id ? 'text-dark' : 'text-white/60 group-hover:text-white'}`}>
+                            <span className={`relative z-10 transition-colors duration-300 ${activeTab === category.id ? 'text-black' : 'text-white/60 group-hover:text-white'}`}>
                                 {category.label}
                             </span>
                             {activeTab === category.id && (
